@@ -1,17 +1,19 @@
 <template>
   <div class="home">
     <div>
-      <div class="lote-buttons">
-        <button class="button-lote" :class="{ active: selectedLote === 1 }" @click="selectLote(1)">
-          Lote 1
-        </button>
-        <button class="button-lote" :class="{ active: selectedLote === 2 }" @click="selectLote(2)">
-          Lote 2
-        </button>
-      </div>
+      <!-- 
+        <div class="lote-buttons">
+          <button class="button-lote" :class="{ active: selectedLote === 1 }" @click="selectLote(1)">
+            Lote 1
+          </button>
+          <button class="button-lote" :class="{ active: selectedLote === 2 }" @click="selectLote(2)">
+            Lote 2
+          </button>
+        </div> -->
 
       <div class="numeros-grid">
-        <Numero v-for="num in displayedNumeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" />
+        <!-- <Numero v-for="num in displayedNumeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" /> -->
+        <Numero v-for="num in numeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" />
       </div>
     </div>
     <div class="card py-2 bottom-sticky">
