@@ -17,7 +17,15 @@
       </div>
     </div>
     <div class="card py-2 bottom-sticky">
-      <carrinho :carrinho="carrinho" @remover="removerDoCarrinho" />
+      <div class="d-flex gap-5">
+        <carrinho :carrinho="carrinho" @remover="removerDoCarrinho" />
+        <div>
+          <h2 class="text-center">Total:</h2>
+          <span>
+            R$ {{ carrinho.length * valorRifa }},00
+          </span>
+        </div>
+      </div>
       <button class="btn btn-success col-md-3 mt-2" @click="openModal" :disabled="carrinho.length === 0">
         Reservar ({{ carrinho.length }} números)
       </button>
@@ -70,6 +78,7 @@ export default {
   data() {
     return {
       selectedLote: 1,
+      valorRifa: 10,
     };
   },
   setup() {
