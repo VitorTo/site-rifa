@@ -1,10 +1,10 @@
 <template>
     <div class="login">
-      <h1>Login Gerencial</h1>
-      <form @submit.prevent="login">
-        <input v-model="email" type="email" placeholder="Email" required />
-        <input v-model="password" type="password" placeholder="Senha" required />
-        <button type="submit">Entrar</button>
+      <h1 class="lobster-two-bold">Login Gerencial</h1>
+      <form @submit.prevent="login" class="px-3">
+        <input class="form-control"  v-model="email" type="email" placeholder="Email" required />
+        <input class="form-control mt-1" v-model="password" type="password" placeholder="Senha" required />
+        <button class="btn btn-success w-100 mt-2" type="submit">Entrar</button>
       </form>
     </div>
 </template>

@@ -14,9 +14,9 @@
         <Numero v-for="num in displayedNumeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" />
       </div>
     </div>
-    <div class="card bottom-sticky">
+    <div class="card py-2 bottom-sticky">
       <carrinho :carrinho="carrinho" @remover="removerDoCarrinho" />
-      <button class="btn btn-success col-md-3" @click="openModal" :disabled="carrinho.length === 0">
+      <button class="btn btn-success col-md-3 mt-2" @click="openModal" :disabled="carrinho.length === 0">
         Reservar ({{ carrinho.length }} números)
       </button>
     </div>
@@ -33,19 +33,19 @@
       <div class="modal-dialog">
         <div class="modal-content text-dark">
           <div class="modal-header">
-            <h5 class="modal-title" id="buyerModalLabel">Finalizar Compra</h5>
+            <h5 class="modal-title" id="buyerModalLabel">Finalizar Reserva</h5>
             <button type="button" class="btn-close" @click="closeModal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <div class="mb-3">
-              <label for="buyerName" class="form-label">Nome do Comprador</label>
+              <label for="buyerName" class="form-label">Seu nome</label>
               <input type="text" class="form-control" id="buyerName" v-model="buyerName" placeholder="Digite seu nome">
             </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" @click="closeModal">Cancelar</button>
-            <button type="button" class="btn btn-primary" @click="finalizarCompra" :disabled="!buyerName">
-              Finalizar Compra
+            <button type="button" class="btn btn-success" @click="finalizarCompra" :disabled="!buyerName">
+              Finalizar Reserva
             </button>
           </div>
         </div>
@@ -118,13 +118,12 @@ export default {
     const finalizarCompra = () => {
       if (!buyerName.value) return;
       const whatsappNumber = configuracoes.value.length > 0 ? configuracoes.value[0]?.whatsapp : "19991367496";
-      const message = `Olá, ${buyerName.value}, gostaria de reservar os números: ${carrinho.value.map(num => num.numero).join(", ")}`;
+      const message = `Olá, sou ${buyerName.value}, gostaria de reservar os números: ${carrinho.value.map(num => num.numero).join(", ")}`;
       const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappLink, '_blank');
       salvarEmAnalise(carrinho.value);
-      carrinho.value = [];
-      buyerName.value = '';
       closeModal();
+      carrinho.value = [];
     };
 
     const salvarEmAnalise = async (numerosSelecionados) => {
@@ -137,12 +136,14 @@ export default {
 
           const updatedNumeros = rifaData.numeros.map(num => {
             if (num.numero === numero.numero) {
+              console.log('buyerName.value', buyerName.value)
               return { ...num, status: '2', comprador: buyerName.value };
             }
             return num;
           });
 
           await updateDoc(rifaRef, { status: '2', numeros: updatedNumeros });
+          buyerName.value = '';
         }
 
         fetchNumeros();
@@ -164,7 +165,8 @@ export default {
       removerDoCarrinho,
       alerts,
       buyerName,
-      showModal
+      showModal,
+      closeModal
     };
   },
   methods: {
@@ -187,7 +189,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
   gap: 10px;
-  padding: 0 5rem;
+  padding: 0 2rem;
 }
 
 .lote-buttons {

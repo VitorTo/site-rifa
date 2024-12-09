@@ -2,9 +2,9 @@
     <div class="carrinho">
       <h2>Seu Carrinho</h2>
       <div class="cart" v-if="carrinho.length > 0">
-        <div class="d-flex align-items-center justify-content-center gap-2" v-for="num in carrinho" :key="num">
-          <span class="numero disponivel"> {{ num?.numero.toString().padStart(3, '0') }} </span>
-          <button class="numero remove" @click="$emit('remover', num)">Remover</button>
+        <div class="d-flex align-items-center justify-content-center gap-2 my-1" v-for="num in carrinho" :key="num">
+          <span class="btn btn-success"> {{ num?.numero.toString().padStart(3, '0') }} </span>
+          <button class="btn btn-danger" @click="$emit('remover', num)">Remover</button>
         </div>
       </div>
       <div v-else>

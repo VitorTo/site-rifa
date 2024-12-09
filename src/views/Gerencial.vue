@@ -1,5 +1,5 @@
 <template>
-  <div class="gerencial">
+  <div class="gerencial card">
     <h1>Gerencial de Rifas</h1>
     
     <!-- Lista de Rifas -->

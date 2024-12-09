@@ -1,19 +1,21 @@
 <!-- FILE: NumberTable.vue -->
 <template>
     <div>
-      <div class="filters">
+      <div class="row px-3">
         <input
-          v-model="filterNumero"
-          placeholder="Filtrar por Número"
-          @input="resetPage"
+        class="form-control col-md-3"
+        v-model="filterNumero"
+        placeholder="Filtrar por Número"
+        @input="resetPage"
         />
         <input
+        class="form-control col-md-3"
           v-model="filterComprador"
           placeholder="Filtrar por Comprador"
           @input="resetPage"
         />
       </div>
-      <table>
+      <table class="table table">
         <thead>
           <tr>
             <th>Número</th>
@@ -33,6 +35,7 @@
             </td>
             <td>
               <input
+                class="form-control"
                 v-model="num.comprador"
                 @change="updateComprador(num)"
                 placeholder="Comprador"

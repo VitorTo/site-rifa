@@ -1,7 +1,7 @@
 <template>
   <button
-    :class="['numero', normalizedStatus]"
-    :disabled="normalizedStatus !== 'disponivel'"
+    :class="['btn', normalizedStatus]"
+    :disabled="normalizedStatus !== 'btn-success'"
     @click="selectNumber()"
   >
     {{ formatNumber(numero.numero) }}
@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { statusEnum } from '@/utils/constants';
+import { statusEnumBootstrap } from '@/utils/constants';
 
 export default {
   name: "NumeroComponente",
@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     normalizedStatus() {
-      return statusEnum[this.numero.status];
+      return statusEnumBootstrap[this.numero.status];
     },
   },
   methods: {
@@ -26,7 +26,7 @@ export default {
       return number.toString().padStart(3, '0');
     },
     selectNumber() {
-      if (this.normalizedStatus === 'disponivel') {
+      if (this.normalizedStatus === 'btn-success') {
         this.$emit('selecionar', this.numero);
       }
     },
