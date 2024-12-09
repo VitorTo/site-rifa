@@ -23,14 +23,12 @@ export default {
 
     const login = async () => {
       try {
-        const res = await signInWithEmailAndPassword(auth, email.value, password.value);
-        
-        console.log("Login bem-sucedido:", res);
+        await signInWithEmailAndPassword(auth, email.value, password.value);
         alert('Login bem-sucedido!');
         router.push('/gerencial');
       } catch (error) {
         console.error("Erro ao fazer login:", error.message);
-        alert('Erro ao fazer login: ' + error.message);
+        alert('Erro ao fazer login');
       }
     };
 

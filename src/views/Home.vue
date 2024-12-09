@@ -136,7 +136,6 @@ export default {
 
           const updatedNumeros = rifaData.numeros.map(num => {
             if (num.numero === numero.numero) {
-              console.log('buyerName.value', buyerName.value)
               return { ...num, status: '2', comprador: buyerName.value };
             }
             return num;
