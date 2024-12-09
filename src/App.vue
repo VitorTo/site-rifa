@@ -1,17 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="app">
+    <header>
+      <h1 style="line-height: 76px;font-size: 4rem;">Rifa Solidária</h1>
+      <p class="lobster-two-bold sub-color mb-5" style="font-size: 8rem;line-height: 105px;">Jeh</p>
+    </header>
+
+    <router-view />
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+};
 </script>
 
 <style>
@@ -20,7 +21,39 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #fff;
   margin-top: 60px;
 }
+body {
+  background-color: #AB0000;
+  background-image: url('./assets/bg-url.png');
+}
+
+* {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+.sub-color{
+  color: #FFD077;
+}
+.lobster-two-bold {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.lobster-two-regular-italic {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.lobster-two-bold-italic {
+  font-family: "Lobster Two", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+
 </style>
