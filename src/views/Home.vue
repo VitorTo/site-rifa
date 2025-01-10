@@ -1,32 +1,61 @@
 <template>
   <div class="home">
-    <div>
-      <!-- 
-        <div class="lote-buttons">
-          <button class="button-lote" :class="{ active: selectedLote === 1 }" @click="selectLote(1)">
-            Lote 1
-          </button>
-          <button class="button-lote" :class="{ active: selectedLote === 2 }" @click="selectLote(2)">
-            Lote 2
-          </button>
-        </div> -->
+    <div class="blob-polygon back-element"></div>
+    <div class="mb-4">
+      <h2>Concorra a um pix de</h2>
+      <div class="position-relative d-flex flex-column align-items-center mb-3">
+        <div class="d-flex align-items-center gap-1">
+          <img src="../assets/price.png" style="width: 30px;height: 44px;">
+          <div class="w-100 p-2 px-3 bg-white rounded-pill mb-2">
+            <span class="text-muted lobster-two-bold" style="font-size: 1.5rem;">R$ 400,00</span>
+          </div>
+          <img src="../assets/price.png" style="width: 30px;height: 44px;transform: rotateY(180deg);">
+        </div>
+        <div class="bg-sub-color text-muted rounded-pill d-flex justify-content-around p-2 px-3 gap-4 lobster-two-bold"
+          style="font-size: 1.5rem;">
+          <span>Valor por um número:</span>
+          <span>R$ 10,00</span>
+        </div>
+      </div>
+      <div class="d-flex justify-content-between align-items-center text-muted">
+        <div class="bg-white info-left"> Sorteio: 30/01 </div>
+        <div class="info-center">
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="d-flex bg-light rounded-circle item-pointer"></span>
+            <span class="lobster-two-bold">Disponível</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="d-flex bg-warning rounded-circle item-pointer"></span>
+            <span class="lobster-two-bold">Reservado</span>
+          </div>
+          <div class="d-flex align-items-center justify-content-center gap-2">
+            <span class="d-flex bg-danger rounded-circle item-pointer"></span>
+            <span class="lobster-two-bold">Comprado</span>
+          </div>
 
+        </div>
+        <div class="bg-white info-right cursor-pointer" @click="openWhatsApp()">
+          <span>Pix</span>
+          <span>{{ WHATSAPP_TEL }}</span>
+        </div>
+      </div>
+    </div>
+    <div>
       <div class="numeros-grid">
-        <!-- <Numero v-for="num in displayedNumeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" /> -->
         <Numero v-for="num in numeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" />
       </div>
     </div>
-    <div class="card py-2 bottom-sticky">
+    <div class="card py-2 bottom-sticky bg-sub-color">
       <div class="d-flex gap-5">
         <carrinho :carrinho="carrinho" @remover="removerDoCarrinho" />
-        <div>
+        <div style="font-size: 2rem;">
           <h2 class="text-center">Total:</h2>
           <span>
             R$ {{ carrinho.length * valorRifa }},00
           </span>
         </div>
       </div>
-      <button class="btn btn-success col-md-3 mt-2" @click="openModal" :disabled="carrinho.length === 0">
+      <button class="btn btn-light col-md-3 mt-2" @click="openModal" :disabled="carrinho.length === 0">
         Reservar ({{ carrinho.length }} números)
       </button>
     </div>
@@ -37,9 +66,9 @@
         <alert :type="alert.type" :message="alert.message" />
       </div>
     </div>
-
     <!-- Modal -->
-    <div v-if="showModal" class="modal fade show d-block" id="buyerModal" tabindex="-1" aria-labelledby="buyerModalLabel" aria-hidden="true">
+    <div v-if="showModal" class="modal fade show d-block" id="buyerModal" tabindex="-1"
+      aria-labelledby="buyerModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content text-dark">
           <div class="modal-header">
@@ -71,6 +100,8 @@ import { onMounted, ref } from 'vue';
 import Numero from '@/components/Numero.vue';
 import Carrinho from '@/components/Carrinho.vue';
 import Alert from '@/components/Alert.vue';
+
+import { WHATSAPP_TEL } from '@/utils/constants';
 
 export default {
   name: "HomeView",
@@ -128,7 +159,7 @@ export default {
 
     const finalizarCompra = () => {
       if (!buyerName.value) return;
-      const whatsappNumber = configuracoes.value.length > 0 ? configuracoes.value[0]?.whatsapp : "19991367496";
+      const whatsappNumber = configuracoes.value.length > 0 ? configuracoes.value[0]?.whatsapp : WHATSAPP_TEL;
       const message = `Olá, sou ${buyerName.value}, gostaria de reservar os números: ${carrinho.value.map(num => num.numero).join(", ")}`;
       const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappLink, '_blank');
@@ -166,6 +197,12 @@ export default {
       fetchNumeros();
     });
 
+
+    const openWhatsApp = function () {
+      const whatsappLink = `https://wa.me/${WHATSAPP_TEL}?text=Olá gostaria de saber mais sobre a rifa adeus às contas.`;
+      window.open(whatsappLink, '_blank');
+    }
+
     return {
       numeros,
       carrinho,
@@ -176,7 +213,9 @@ export default {
       alerts,
       buyerName,
       showModal,
-      closeModal
+      closeModal,
+      openWhatsApp,
+      WHATSAPP_TEL
     };
   },
   methods: {
@@ -195,6 +234,13 @@ export default {
 </script>
 
 <style>
+.back-element {
+  position: fixed;
+  top: 26vh;
+  z-index: -1;
+  right: 14rem;
+}
+
 .numeros-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));

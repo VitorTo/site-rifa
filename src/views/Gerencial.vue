@@ -5,7 +5,7 @@
     <!-- Lista de Rifas -->
     <div v-for="rifa in rifas" :key="rifa.id" class="rifa-item">
       <h2>{{ rifa.nome }}</h2>
-      <!-- <button @click="initNumbers(rifa.id, 300)">Inicializar Números</button> -->
+      <!-- <button @click="initNumbers(rifa.id, 170)">Inicializar Números</button> -->
       
       <!-- Adicionar Número -->
       <!-- <div class="add-numero">

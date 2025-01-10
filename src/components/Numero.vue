@@ -1,7 +1,7 @@
 <template>
   <button
-    :class="['btn', normalizedStatus]"
-    :disabled="normalizedStatus !== 'btn-success'"
+    :class="['btn-style-personalize text-muted border-0 rounded-circle py-3 btn', normalizedStatus]"
+    :disabled="normalizedStatus !== 'btn-light'"
     @click="selectNumber()"
   >
     {{ formatNumber(numero.numero) }}
@@ -10,7 +10,6 @@
 
 <script>
 import { statusEnumBootstrap } from '@/utils/constants';
-
 export default {
   name: "NumeroComponente",
   props: {
@@ -26,7 +25,7 @@ export default {
       return number.toString().padStart(3, '0');
     },
     selectNumber() {
-      if (this.normalizedStatus === 'btn-success') {
+      if (this.normalizedStatus === 'btn-light') {
         this.$emit('selecionar', this.numero);
       }
     },
@@ -35,6 +34,13 @@ export default {
 </script>
 
 <style>
+.btn-style-personalize {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .numero {
   padding: 10px;
   font-size: 16px;

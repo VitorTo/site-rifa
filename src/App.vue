@@ -1,12 +1,12 @@
 <template>
-  <div id="app">
+<div id="app">
     <header>
-      <h1 style="line-height: 76px;font-size: 4rem;">Rifa Solidária</h1>
-      <p class="lobster-two-bold sub-color mb-5" style="font-size: 8rem;line-height: 105px;">Jeh</p>
+      <!-- <img 
+        src="/src/assets/message.png"
+      > -->
+      <h1 class="sub-title">Rifa</h1>
+      <span class="title lobster-two-bold sub-color">Adeus às contas</span>
     </header>
-    <div class="card m-4 p-2">
-      <img src="./assets/premio.png" alt="">
-    </div>
 
     <router-view />
   </div>
@@ -29,8 +29,8 @@ export default {
 }
 
 body {
-  background-color: #AB0000;
-  background-image: url('./assets/bg-url.png');
+  background: linear-gradient(rgba(213, 185, 135, 0.6), rgba(213, 185, 135, 0.4)),
+    url('./assets/bg-url.png') center/cover no-repeat;
 }
 
 * {
@@ -39,8 +39,16 @@ body {
   font-style: normal;
 }
 
+.cursor-pointer {
+  cursor: pointer!important;
+}
+
 .sub-color {
   color: #FFD077;
+}
+
+.bg-sub-color {
+  background-color: #FFD077;
 }
 
 .lobster-two-bold {
@@ -59,5 +67,85 @@ body {
   font-family: "Lobster Two", sans-serif;
   font-weight: 700;
   font-style: italic;
+}
+
+/* .blob-polygon {
+  width: 300px;
+  height: 300px;
+  background-color: #3ca9e2;
+  clip-path: polygon(
+    25% 2%,
+    80% 4%,
+    100% 50%,
+    90% 85%,
+    50% 100%,
+    10% 100%,
+    0% 61%
+  );
+} */
+
+/* MOBILE */
+.sub-title {
+  font-size: 2rem;
+  line-height: 0px;
+}
+.title {
+  font-size: 3.5rem;
+  line-height: 50px;
+}
+
+.info-left {
+  width: 8rem;
+  height: 3.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  border-top-right-radius: 2rem;
+  border-bottom-right-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+.info-center .item-pointer {
+  width: 16px;
+  height: 16px;
+}
+
+.info-center span.lobster-two-bold{
+  font-size: 1.2rem;
+}
+
+.info-right {
+  width: 8rem;
+  height: 3.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5rem;
+  border-top-left-radius: 2rem;
+  border-bottom-left-radius: 2rem;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .sub-title {
+    font-size: 4rem;
+    line-height: 15px;
+  }
+  .title {
+    font-size: 8rem;
+    line-height: 105px;
+  }
+  .info-center {
+    display: flex;
+    gap: 1rem;
+  }
+  .info-center span.lobster-two-bold{
+    font-size:1.5rem;
+  }
 }
 </style>

@@ -4,7 +4,9 @@ export const statusEnum = {
     3: 'vendido',
 }
 export const statusEnumBootstrap = {
-    1: 'btn-success',
+    1: 'btn-light',
     2: 'btn-warning',
     3: 'btn-danger',
 }
+
+export const WHATSAPP_TEL = '16991334567'

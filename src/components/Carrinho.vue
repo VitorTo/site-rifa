@@ -3,7 +3,7 @@
       <h2>Seu Carrinho</h2>
       <div class="cart" v-if="carrinho.length > 0">
         <div class="d-flex align-items-center justify-content-center gap-2 my-1" v-for="num in carrinho" :key="num">
-          <span class="btn btn-success"> {{ num?.numero.toString().padStart(3, '0') }} </span>
+          <span class="btn-style-personalize btn btn-light border-0 rounded-circle py-3"> {{ num?.numero.toString().padStart(3, '0') }} </span>
           <button class="btn btn-danger" @click="$emit('remover', num)">Remover</button>
         </div>
       </div>
@@ -24,6 +24,13 @@
   </script>
   
   <style>
+.btn-style-personalize {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .numero {
   padding: 10px;
   font-size: 16px;
@@ -46,7 +53,7 @@
 } 
 
 .cart {
-  max-height: 10rem;
+  max-height: 6rem;
   overflow-y: auto;
 }
   </style>
