@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center text-muted">
-        <div class="bg-white info-left"> Sorteio: 30/01 </div>
+        <div class="bg-white info-left"> Sorteio: 02/02 </div>
         <div class="info-center">
           <div class="d-flex align-items-center justify-content-center gap-2">
             <span class="d-flex bg-light rounded-circle item-pointer"></span>
