@@ -184,8 +184,8 @@ export default {
           });
 
           await updateDoc(rifaRef, { status: '2', numeros: updatedNumeros });
-          buyerName.value = '';
         }
+        buyerName.value = '';
 
         fetchNumeros();
       } catch (error) {
