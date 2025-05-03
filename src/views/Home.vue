@@ -2,23 +2,24 @@
   <div class="home">
     <div class="blob-polygon back-element"></div>
     <div class="mb-4">
-      <h2>Concorra a um pix de</h2>
+      <h2>DOIS SORTEIOS, CONCORRA:</h2>
       <div class="position-relative d-flex flex-column align-items-center mb-3">
         <div class="d-flex align-items-center gap-1">
-          <img src="../assets/price.png" style="width: 30px;height: 44px;">
-          <div class="w-100 p-2 px-3 bg-white rounded-pill mb-2">
-            <span class="text-muted lobster-two-bold" style="font-size: 1.5rem;">R$ 400,00</span>
+          <img v-if="!isMobile" src="../assets/price.png" style="width: 100px; height: 150px; ">
+          <div class="w-100 p-2 px-3 rounded-pill mb-2">
+            <img src="../assets/bg-gifts.png" :style="`height: ${isMobile ? '250px' : '400px'}`">
+            <!-- <span class="text-muted lobster-two-bold" style="font-size: 1.5rem;">R$ 400,00</span> -->
           </div>
-          <img src="../assets/price.png" style="width: 30px;height: 44px;transform: rotateY(180deg);">
+          <img v-if="!isMobile" src="../assets/price.png" style="width: 100px; height: 150px; transform: rotateY(180deg);">
         </div>
-        <div class="bg-sub-color text-muted rounded-pill d-flex justify-content-around p-2 px-3 gap-4 lobster-two-bold"
+        <div class="bg-sub-color text-white rounded-pill d-flex justify-content-around p-2 px-3 gap-4 lobster-two-bold"
           style="font-size: 1.5rem;">
           <span>Valor por um número:</span>
           <span>R$ 10,00</span>
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center text-muted">
-        <div class="bg-white info-left"> Sorteio: 08/03 </div>
+        <div class="bg-white info-left"> 2 Sorteios </div>
         <div class="info-center">
           <div class="d-flex align-items-center justify-content-center gap-2">
             <span class="d-flex bg-light rounded-circle item-pointer"></span>
@@ -35,8 +36,8 @@
 
         </div>
         <div class="bg-white info-right cursor-pointer" @click="openWhatsApp()">
-          <span>Pix</span>
-          <span>{{ WHATSAPP_TEL }}</span>
+          <span>Saber mais</span>
+          <span>{{ celNumber.replace("+5516", "") }}</span>
         </div>
       </div>
     </div>
@@ -45,9 +46,9 @@
         <Numero v-for="num in numeros" :key="num.numero" :numero="num" @selecionar="adicionarAoCarrinho" />
       </div>
     </div>
-    <div class="card py-2 bottom-sticky bg-sub-color">
+    <div class="text-white card py-2 bottom-sticky bg-sub-color">
       <div class="d-flex gap-5">
-        <carrinho :carrinho="carrinho" @remover="removerDoCarrinho" />
+        <Carrinho :carrinho="carrinho" @remover="removerDoCarrinho" />
         <div style="font-size: 2rem;">
           <h2 class="text-center">Total:</h2>
           <span>
@@ -105,11 +106,16 @@ import { WHATSAPP_TEL } from '@/utils/constants';
 
 export default {
   name: "HomeView",
-  components: { Numero, Carrinho, Alert },
+  components: { 
+    Numero, 
+    Carrinho, 
+    Alert 
+  },
   data() {
     return {
       selectedLote: 1,
       valorRifa: 10,
+      isMobile: window.innerWidth <= 800,
     };
   },
   setup() {
@@ -157,9 +163,11 @@ export default {
       showModal.value = false;
     };
 
+    const celNumber = configuracoes.value.length > 0 ? configuracoes.value[0]?.whatsapp : WHATSAPP_TEL;
+
     const finalizarCompra = () => {
       if (!buyerName.value) return;
-      const whatsappNumber = configuracoes.value.length > 0 ? configuracoes.value[0]?.whatsapp : WHATSAPP_TEL;
+      const whatsappNumber = celNumber;
       const message = `Olá, sou ${buyerName.value}, gostaria de reservar os números: ${carrinho.value.map(num => num.numero).join(", ")}`;
       const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
       window.open(whatsappLink, '_blank');
@@ -183,13 +191,15 @@ export default {
             return num;
           });
 
-          await updateDoc(rifaRef, { status: '2', numeros: updatedNumeros });
+          await updateDoc(rifaRef, { 
+            numeros: updatedNumeros 
+          });
         }
         buyerName.value = '';
-
         fetchNumeros();
       } catch (error) {
         console.error("Erro ao salvar números em análise:", error);
+        alerts.value.push({ type: 'danger', message: 'Erro ao salvar a reserva. Por favor, tente novamente.' });
       }
     };
 
@@ -197,9 +207,8 @@ export default {
       fetchNumeros();
     });
 
-
     const openWhatsApp = function () {
-      const whatsappLink = `https://wa.me/${WHATSAPP_TEL}?text=Olá gostaria de saber mais sobre a rifa adeus às contas.`;
+      const whatsappLink = `https://wa.me/${celNumber}?text=Olá gostaria de saber mais sobre a rifa da juventude.`;
       window.open(whatsappLink, '_blank');
     }
 
@@ -215,7 +224,7 @@ export default {
       showModal,
       closeModal,
       openWhatsApp,
-      WHATSAPP_TEL
+      celNumber
     };
   },
   methods: {
@@ -228,7 +237,7 @@ export default {
       const perLote = 150;
       const start = (this.selectedLote - 1) * perLote;
       return this.numeros.slice(start, start + perLote);
-    },
+    }
   }
 };
 </script>
