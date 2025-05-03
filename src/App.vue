@@ -5,7 +5,7 @@
         src="/src/assets/message.png"
       > -->
       <h1 class="sub-title">Rifa</h1>
-      <span class="title lobster-two-bold sub-color">Adeus às contas</span>
+      <span class="title lobster-two-bold sub-color">da Juventude</span>
     </header>
 
     <router-view />
@@ -44,11 +44,11 @@ body {
 }
 
 .sub-color {
-  color: #FFD077;
+  color: #0852CF;
 }
 
 .bg-sub-color {
-  background-color: #FFD077;
+  background-color: #0852CF;
 }
 
 .lobster-two-bold {
