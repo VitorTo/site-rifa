@@ -2,7 +2,6 @@
   <div class="home">
     <div class="blob-polygon back-element"></div>
     <div class="mb-4">
-      <h2>DOIS SORTEIOS, CONCORRA:</h2>
       <div class="position-relative d-flex flex-column align-items-center mb-3">
         <div class="d-flex align-items-center gap-1">
           <img v-if="!isMobile" src="../assets/price.png" style="width: 100px; height: 150px; ">
@@ -15,11 +14,11 @@
         <div class="bg-sub-color text-white rounded-pill d-flex justify-content-around p-2 px-3 gap-4 lobster-two-bold"
           style="font-size: 1.5rem;">
           <span>Valor por um número:</span>
-          <span>R$ 10,00</span>
+          <span>R$ 15,00</span>
         </div>
       </div>
       <div class="d-flex justify-content-between align-items-center text-muted">
-        <div class="bg-white info-left"> 2 Sorteios </div>
+        <div class="bg-white info-left">  Sorteios </div>
         <div class="info-center">
           <div class="d-flex align-items-center justify-content-center gap-2">
             <span class="d-flex bg-light rounded-circle item-pointer"></span>

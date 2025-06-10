@@ -9,4 +9,4 @@ export const statusEnumBootstrap = {
     3: 'btn-danger',
 }
 
-export const WHATSAPP_TEL = '+5516991468873'
+export const WHATSAPP_TEL = '+5516991005391'
