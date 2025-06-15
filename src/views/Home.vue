@@ -6,7 +6,7 @@
         <div class="d-flex align-items-center gap-1">
           <img v-if="!isMobile" src="../assets/price.png" style="width: 100px; height: 150px; ">
           <div class="w-100 p-2 px-3 rounded-pill mb-2">
-            <img src="../assets/bg-gifts.png" :style="`height: ${isMobile ? '250px' : '400px'}`">
+            <img src="../assets/bg-gifts.png" :style="`height: ${isMobile ? '190px' : '400px'}`">
             <!-- <span class="text-muted lobster-two-bold" style="font-size: 1.5rem;">R$ 400,00</span> -->
           </div>
           <img v-if="!isMobile" src="../assets/price.png" style="width: 100px; height: 150px; transform: rotateY(180deg);">
